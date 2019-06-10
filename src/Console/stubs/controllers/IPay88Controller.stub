@@ -1,0 +1,46 @@
+<?php
+
+namespace {{namespace}}Http\Controllers;
+
+use Aqjw\IPay88\Controllers\ReceiverController;
+use Illuminate\Http\Request;
+
+class IPay88Controller extends ReceiverController
+{
+    /**
+     * This is the case when the payment was successful.
+     * @param  Request $request
+     */
+    protected function then(Request $request)
+    {
+        //
+    }
+
+    /**
+     * This is the case when the payment failed.
+     * @param  Request $request
+     */
+    protected function catch(Request $request)
+    {
+        //
+    }
+
+    /**
+     * This is the case when the status is not defined.
+     * @param  Request $request
+     */
+    protected function another(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Url to redirect to another page
+     * when the user has been redirected from the payment
+     * @return string
+     */
+    protected function redirect(): string
+    {
+        return url('/');
+    }
+}

@@ -75,6 +75,32 @@ class IPay88Service
     }
 
     /**
+     * Make backend url
+     * @return self
+     */
+    private function makeBackendURL(): IPay88Service
+    {
+        if (empty($this->form['BackendURL'])) {
+            $this->form['BackendURL'] = route('iPay88.backend-url');
+        }
+
+        return $this;
+    }
+
+    /**
+     * Make response url
+     * @return self
+     */
+    private function makeResponseURL(): IPay88Service
+    {
+        if (empty($this->form['ResponseURL'])) {
+            $this->form['ResponseURL'] = route('iPay88.response-url');
+        }
+
+        return $this;
+    }
+
+    /**
      * Validate form
      * @return void
      * @throws Exception if the form contains invalid data
@@ -98,16 +124,19 @@ class IPay88Service
     {
         $this
             ->makeSignature()
+            ->makeBackendURL()
+            ->makeResponseURL()
             ->validate();
 
-        // $response = $this->client->post('', [
-        //     RequestOptions::FORM_PARAMS => $this->form,
-        // ]);
+        $response = $this->client->post('', [
+            RequestOptions::FORM_PARAMS => $this->form,
+        ]);
 
         // return [
         //     $this->getData(),
         //     $response->getStatusCode(),
-        //     json_decode($response->getBody()->getContents(), true)
+        //     $response->getHeaders(),
+        //     $response->getBody()->getContents()
         // ];
 
  

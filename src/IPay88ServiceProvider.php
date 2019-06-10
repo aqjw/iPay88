@@ -20,7 +20,6 @@ class IPay88ServiceProvider extends ServiceProvider
 
         Route::middleware('web')
             ->prefix('ipay88')
-            ->namespace('Aqjw\IPay88\Controllers')
             ->group(__DIR__ . '/routes.php');
     }
 
@@ -34,5 +33,11 @@ class IPay88ServiceProvider extends ServiceProvider
         $this->app->singleton('iPay88', function () {
             return $this->app->make(IPay88Service::class);
         });
+
+        $this->app->singleton('command.iPay88.make', function ($app) {
+            return $app->make(Console\MakeCommand::class);
+        });
+
+        $this->commands(['command.iPay88.make']);
     }
 }
