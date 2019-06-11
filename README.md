@@ -12,7 +12,11 @@ Aqjw\IPay88\IPay88ServiceProvider::class,
 ```
 
 Copy the package config to your local config with the publish command:
-
 ```shell
 php artisan vendor:publish --provider="Aqjw\IPay88\IPay88ServiceProvider"
+```
+
+Make the controller using the command:
+```shell
+php artisan ipay88:make
 ```

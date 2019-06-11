@@ -40,12 +40,16 @@ class MakeCommand extends Command
      */
     public function handle()
     {
-        file_put_contents(
-            app_path('Http/Controllers/IPay88Controller.php'),
-            $this->compileControllerStub()
-        );
+        try {
+            file_put_contents(
+                app_path('Http/Controllers/IPay88Controller.php'),
+                $this->compileControllerStub()
+            );
 
-        $this->info('IPay88 Controller generated successfully.');
+            $this->info('IPay88 Controller generated successfully.');
+        } catch (\Exception $e) {
+            $this->error($e->getMessage());
+        }
     }
 
     /**
