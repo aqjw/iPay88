@@ -20,3 +20,8 @@ Make the controller using the command:
 ```shell
 php artisan ipay88:make
 ```
+
+Add the route to the middleware array in app/Http/Middleware/VerifyCsrfToken.php:
+```shell
+ipay88/*
+```
