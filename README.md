@@ -3,7 +3,7 @@
 Require this package with composer. It is recommended to only require the package for development.
 
 ```shell
-composer require aqjw/iPay88 --dev
+composer require aqjw/iPay88:dev-master
 ```
 
 If you don't use auto-discovery, add the ServiceProvider to the providers array in config/app.php
