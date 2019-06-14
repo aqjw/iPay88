@@ -3,25 +3,16 @@
 namespace Aqjw\IPay88\Services;
 
 use Exception;
-use GuzzleHttp\Client;
-use GuzzleHttp\RequestOptions;
 
 class IPay88Service
 {
     use TraitGetSet;
 
-    private $client;
     private $form;
 
     /***/
     public function __construct()
     {
-        // create guzzle instance with option
-        $this->client = new Client([
-            'base_uri' => $this->getUrl(),
-            'http_errors' => false,
-        ]);
-
         // set default value
         $this->form = [
             'MerchantCode' => config('iPay88.MerchantCode'),
@@ -120,7 +111,7 @@ class IPay88Service
         }
     }
 
-    public function send()
+    public function buildForm()
     {
         $this
             ->makeSignature()
@@ -128,30 +119,11 @@ class IPay88Service
             ->makeResponseURL()
             ->validate();
 
-        // $response = $this->client->post('', [
-        //     RequestOptions::FORM_PARAMS => $this->form,
-        // ]);
-
-        // return [
-        //     $this->getData(),
-        //     $response->getStatusCode(),
-        //     $response->getHeaders(),
-        //     $response->getBody()->getContents()
-        // ];
-
- 
-        //////////
-        // TODO //
-        //////////
-
-        echo "<form method='post' name='ePayment' action='{$this->getUrl()}'>";
+        echo "<form method='post' id='IPay88' action='{$this->getUrl()}'>";
         foreach ($this->form as $key => $value) {
-            echo "<input name='{$key}' value='{$value}'>";
+            echo "<input type='hidden' name='{$key}' value='{$value}'>";
         }
-        echo "<input type='submit'></form>";
+        echo "<script>document.getElementById('IPay88').submit()</script>";
         die;
-
-        return $this->getData();
-        // TODO - send form
     }
 }

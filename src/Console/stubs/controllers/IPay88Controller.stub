@@ -11,7 +11,7 @@ class IPay88Controller extends ReceiverController
      * This is the case when the payment was successful.
      * @param  Request $request
      */
-    protected function then(Request $request)
+    public function then(Request $request)
     {
         //
     }
@@ -20,7 +20,7 @@ class IPay88Controller extends ReceiverController
      * This is the case when the payment failed.
      * @param  Request $request
      */
-    protected function catch(Request $request)
+    public function catch(Request $request)
     {
         //
     }
@@ -29,7 +29,7 @@ class IPay88Controller extends ReceiverController
      * This is the case when the status is not defined.
      * @param  Request $request
      */
-    protected function another(Request $request)
+    public function another(Request $request)
     {
         //
     }
@@ -37,9 +37,32 @@ class IPay88Controller extends ReceiverController
     /**
      * Url to redirect to another page
      * when the user has been redirected from the payment
+     * with status Success
      * @return string
      */
-    protected function redirect(): string
+    protected function redirectSuccess(): string
+    {
+        return url('/');
+    }
+
+    /**
+     * Url to redirect to another page
+     * when the user has been redirected from the payment
+     * with status Failed
+     * @return string
+     */
+    protected function redirectFailed(): string
+    {
+        return url('/');
+    }
+
+    /**
+     * Url to redirect to another page
+     * when the user has been redirected from the payment
+     * with undefined status
+     * @return string
+     */
+    protected function redirectAnother(): string
     {
         return url('/');
     }

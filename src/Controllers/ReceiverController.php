@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 class ReceiverController
 {
+    private $redirectUrl;
+
     /**
      * Receiving a request from the payment
      * @param  Request $request
@@ -17,10 +19,13 @@ class ReceiverController
 
         if ($status === null) {
             $this->another($request);
+            $this->redirectUrl = $this->redirectAnother();
         } else if ($status == 1) {
             $this->then($request);
+            $this->redirectUrl = $this->redirectSuccess();
         } else {
             $this->catch($request);
+            $this->redirectUrl = $this->redirectFailed();
         }
         
         return $this->after($request);
@@ -71,7 +76,7 @@ class ReceiverController
         if ($request->route()->named('iPay88.backend-url')) {
             die('RECEIVEOK');
         } else {
-            return redirect($this->redirect());
+            return redirect($this->redirectUrl);
         }
     }
 
@@ -80,7 +85,33 @@ class ReceiverController
      * when the user has been redirected from the payment
      * @return string
      */
-    protected function redirect(): string
+    protected function redirectSuccess(): string
+    {
+        /**
+         * stub
+         */
+        return url('/');
+    }
+
+    /**
+     * Url to redirect to another page
+     * when the user has been redirected from the payment
+     * @return string
+     */
+    protected function redirectFailed(): string
+    {
+        /**
+         * stub
+         */
+        return url('/');
+    }
+
+    /**
+     * Url to redirect to another page
+     * when the user has been redirected from the payment
+     * @return string
+     */
+    protected function redirectAnother(): string
     {
         /**
          * stub
